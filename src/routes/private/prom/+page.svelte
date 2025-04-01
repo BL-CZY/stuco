@@ -25,22 +25,55 @@
     });
 </script>
 
-{#if promSignupSummaries}
-    <h1>Prom Signups</h1>
-    <ul>
-        {#each promSignupSummaries as signup}
-            <li>
-                <button
-                    onclick={() => {
-                        goto(`/private/prom/${signup.id}`);
-                    }}
-                >
-                    <p>{signup.name} - {signup.grade}</p>
-                    <p>has paid: {signup.has_paid ? 'yes' : 'no'}</p>
-                </button>
-            </li>
-        {/each}
-    </ul>
-{:else}
-    <p>Loading...</p>
-{/if}
+<div class="card bg-base-100 shadow-lg">
+    <div class="card-body">
+        <h2 class="card-title mb-4 text-xl">Prom Signups</h2>
+
+        {#if promSignupSummaries}
+            <div class="overflow-x-auto">
+                <table class="table-zebra table w-full">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                            <th>Payment Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each promSignupSummaries as signup}
+                            <tr>
+                                <td>{signup.name}</td>
+                                <td>{signup.grade}</td>
+                                <td>
+                                    <div
+                                        class="badge {signup.has_paid
+                                            ? 'badge-success'
+                                            : 'badge-warning'}"
+                                    >
+                                        {signup.has_paid ? 'Paid' : 'Unpaid'}
+                                    </div>
+                                </td>
+                                <td>
+                                    <button
+                                        class="btn btn-sm btn-outline"
+                                        onclick={() => {
+                                            goto(`/private/prom/${signup.id}`);
+                                        }}
+                                    >
+                                        View Details
+                                    </button>
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
+        {:else}
+            <div class="flex justify-center p-6">
+                <div class="loading loading-spinner loading-lg"></div>
+                <p class="ml-4">Loading signups...</p>
+            </div>
+        {/if}
+    </div>
+</div>
