@@ -1,6 +1,8 @@
 <script>
     let element = $state();
     import { fly } from 'svelte/transition';
+    import prom from '$lib/images/prom/prom.png';
+    import { goto } from '$app/navigation';
     let show = $state(false);
     $effect(() => {
         show = true;
@@ -42,16 +44,9 @@
         <h2 class="mb-8 text-center text-3xl font-bold">Upcoming Events</h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <!-- Prom Card with centered title -->
-            <a
-                href="/prom"
-                class="card bg-base-100 shadow-xl transition-shadow duration-300 hover:shadow-2xl"
-            >
+            <div class="card bg-base-100 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
                 <figure>
-                    <img
-                        src="/api/placeholder/600/300"
-                        alt="Prom Night Image"
-                        class="h-48 w-full object-cover"
-                    />
+                    <img src={prom} alt="Prom Night" class="h-48 w-full object-cover" />
                 </figure>
                 <div class="card-body">
                     <h3 class="card-title justify-center text-2xl">Prom Night</h3>
@@ -61,10 +56,11 @@
                     </p>
                     <div class="card-actions mt-4 justify-end">
                         <div class="badge badge-outline">May 31</div>
-                        <div class="badge badge-primary">Register Now</div>
+                        <a href={prom} class="badge badge-secondary">View Poster</a>
+                        <a href="/prom" class="badge badge-primary">Register Now</a>
                     </div>
                 </div>
-            </a>
+            </div>
             <!-- Placeholder for future events (currently empty/disabled) -->
             <div class="card bg-base-100 opacity-50 shadow-sm">
                 <div class="card-body flex min-h-64 items-center justify-center">
