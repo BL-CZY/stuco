@@ -17,7 +17,7 @@ export const load = async ({ locals: { supabase }, params: { id } }) => {
             id: string;
             name: string;
             grade: string;
-            options: { selection: string };
+            options: { guestName?: string };
             has_paid: boolean;
             payment_method: string;
             signup_id: string;

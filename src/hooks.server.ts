@@ -72,7 +72,7 @@ const authGuard: Handle = async ({ event, resolve }) => {
     event.locals.user = user;
 
     if (!event.locals.session && event.url.pathname.startsWith('/private')) {
-        redirect(303, '/auth');
+        redirect(303, '/auth?msg=Hacking into STUCO?? Idk man, nice try ig... Now get outta here.');
     }
 
     if (event.locals.session && event.url.pathname === '/auth') {

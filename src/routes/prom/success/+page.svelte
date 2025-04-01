@@ -1,9 +1,10 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     const { data } = $props();
-    const { id } = $derived(data);
+    const { id, cost } = $derived(data);
     $effect(() => {
         window.localStorage.setItem('id', id);
+        window.localStorage.setItem('cost', cost);
     });
 </script>
 
@@ -32,6 +33,7 @@
             <p class="mb-6">Your registration has been successfully submitted.</p>
 
             <div class="bg-base-200 mb-6 w-full rounded-lg p-3">
+                <p class="mt-2 text-xs opacity-60">Your cost is: {cost}</p>
                 <p class="text-sm opacity-70">Reference ID:</p>
                 <p class="font-mono text-sm">{id}</p>
                 <p class="mt-2 text-xs opacity-60">Please save this ID for your records.</p>
@@ -42,10 +44,11 @@
                     class="btn btn-primary"
                     onclick={() => {
                         window.localStorage.removeItem('id');
+                        window.localStorage.removeItem('cost');
                         goto('/prom');
                     }}
                 >
-                    Register Another Person
+                    Register Again
                 </button>
 
                 <button

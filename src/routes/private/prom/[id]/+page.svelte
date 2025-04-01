@@ -6,7 +6,7 @@
     let paymentMethod = $state('');
 </script>
 
-<div class="bg-base-200 min-h-screen p-6">
+<div class="bg-base-200 rounded-2xl p-6">
     <div class="mx-auto max-w-2xl">
         {#if prom}
             <div class="card bg-base-100 shadow-xl">
@@ -35,10 +35,10 @@
                         </div>
 
                         <div class="form-control">
-                            <span class="label-text font-medium">Option Selected</span>
+                            <span class="label-text font-medium">Guest Name</span>
                             <input
                                 type="text"
-                                value={prom.options.selection}
+                                value={prom.options.guestName || 'No'}
                                 class="input input-bordered"
                                 disabled
                             />
