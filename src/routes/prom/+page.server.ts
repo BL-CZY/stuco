@@ -4,18 +4,18 @@ import { v4 as uuidv4 } from 'uuid';
 export const actions = {
     new: async ({ request, locals: { supabase } }) => {
         let formData = await request.formData();
-        let name = formData.get('name') as string;
-        let grade = formData.get('grade') as string;
-        let hasGuest = formData.get('hasGuest') as string;
+        let name = formData.get('name') as string | null;
+        let grade = formData.get('grade') as string | null;
+        let hasGuest = formData.get('hasGuest') as string | null;
         let signup_id = name + uuidv4();
 
         interface Options {
-            guestName?: string;
+            guestName: string | null;
         }
 
         let options = {} as Options;
         if (hasGuest) {
-            let guestName = formData.get('guestName') as string;
+            let guestName = formData.get('guestName') as string | null;
             options.guestName = guestName;
         }
 

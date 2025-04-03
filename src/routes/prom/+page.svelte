@@ -110,8 +110,9 @@
                     <p>Your cost is 36€</p>
                 {/if}
 
-                <div class="form-control mt-6">
-                    <input type="submit" value="Submit" class="btn btn-primary w-full" />
+                <div class="mt-6 flex flex-col gap-2 sm:flex-row">
+                    <input type="submit" value="Submit" class="btn btn-primary w-full sm:flex-1" />
+                    <a href="/" class="btn btn-secondary w-full sm:flex-1">Return to Home</a>
                 </div>
             </form>
         </div>
