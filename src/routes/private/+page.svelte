@@ -27,3 +27,14 @@
         </div>
     </div>
 </div>
+
+<div class="flex flex-wrap gap-4">
+    <button
+        class="btn btn-primary"
+        onclick={() => {
+            goto('/private/add-event');
+        }}
+    >
+        Add Event
+    </button>
+</div>
