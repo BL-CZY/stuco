@@ -105,9 +105,17 @@
                 {/if}
 
                 {#if grade && grade === 'Sec 4'}
-                    <p>Your cost is 30€</p>
+                    {#if hasGuest}
+                        <p>Your cost is 30€ + 36€</p>
+                    {:else}
+                        <p>Your cost is 30€</p>
+                    {/if}
                 {:else if grade}
-                    <p>Your cost is 36€</p>
+                    {#if hasGuest}
+                        <p>Your cost is 36€ + 36€</p>
+                    {:else}
+                        <p>Your cost is 36€</p>
+                    {/if}
                 {/if}
 
                 <div class="mt-6 flex flex-col gap-2 sm:flex-row">

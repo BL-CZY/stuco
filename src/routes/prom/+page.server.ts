@@ -35,6 +35,9 @@ export const actions = {
             redirect(303, '/prom/error');
         }
 
-        redirect(303, '/prom/success?id=' + signup_id + '&cost=' + (grade === 'Sec 4' ? 30 : 36));
+        let cost = grade === 'Sec 4' ? 30 : 36;
+        cost += options.guestName ? 36 : 0;
+
+        redirect(303, '/prom/success?id=' + signup_id + '&cost=' + cost);
     }
 };
