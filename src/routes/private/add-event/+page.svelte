@@ -24,8 +24,22 @@
                     <option value="select">Selection</option>
                 </select>
 
-                <p>{element.name}</p>
+                <label for={`${i}-q-name`}>Question Name:</label>
+                <input
+                    type="text"
+                    name={`${i}-q-name`}
+                    id={`${i}-q-name`}
+                    placeholder="Question Name"
+                    bind:value={element.name}
+                />
+
                 <p>{element.conditions}</p>
+
+                <button
+                    onclick={() => {
+                        form.elements.splice(i, 1);
+                    }}>Remove element</button
+                >
             </div>
         {:else if element.type === 'text'}
             <div>

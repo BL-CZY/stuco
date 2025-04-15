@@ -1,14 +1,25 @@
+export type Operator = '=' | '!=' | '<' | '<=' | '>' | '>=' | 'include' | 'exclude';
+
+export interface Condition {
+    // the name of the value
+    name: string;
+    // the value to check against
+    target: string;
+    // the operator to use
+    operator: Operator;
+}
+
 export interface EventSignupElementText {
     type: 'text';
     text: string;
-    conditions: { name: string; target: string; negate: boolean }[];
+    conditions: Condition[];
     color: 'regular' | 'warning';
 }
 
 export interface EventSignupElementQuestion {
     type: 'question';
     // conditions under which this question will show
-    conditions: { name: string; target: string; negate: boolean }[];
+    conditions: Condition[];
     name: string;
     body:
         | {
@@ -48,7 +59,7 @@ export type EventSignupQuestionBody =
 export interface EventSignupQuestion {
     type: 'question';
     // conditions under which this question will show
-    conditions: { name: string; target: string; negate: boolean }[];
+    conditions: Condition[];
     name: string;
     body: EventSignupQuestionBody;
 }
