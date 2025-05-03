@@ -16,30 +16,8 @@ export interface EventSignupElementText {
     color: 'regular' | 'warning';
 }
 
-export interface EventSignupElementQuestion {
-    type: 'question';
-    // conditions under which this question will show
-    conditions: Condition[];
-    name: string;
-    body:
-        | {
-              type: 'checkbox';
-              // bind to one of the booleans
-              bind: string;
-          }
-        | {
-              type: 'input';
-          }
-        | {
-              type: 'select';
-              options: string[];
-          };
-}
-
 export interface EventSignupQuestionCheckbox {
     type: 'checkbox';
-    // bind to one of the booleans
-    bind: string;
 }
 
 export interface EventSignupQuestionInput {
@@ -56,11 +34,12 @@ export type EventSignupQuestionBody =
     | EventSignupQuestionInput
     | EventSignupQuestionSelect;
 
-export interface EventSignupQuestion {
+export interface EventSignupElementQuestion {
     type: 'question';
     // conditions under which this question will show
     conditions: Condition[];
-    name: string;
+    question: string;
+    id: string;
     body: EventSignupQuestionBody;
 }
 
