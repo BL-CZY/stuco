@@ -95,7 +95,7 @@
                                         ) {
                                             element.body = {
                                                 type: 'select',
-                                                options: ['']
+                                                options: ['New Option']
                                             };
                                         } else if (
                                             (target.target as HTMLSelectElement).value ===
@@ -147,17 +147,22 @@
                             </button>
                         </div>
 
-                        {#if element.text}
-                            <p class="text-base-content bg-base-200 rounded p-2">{element.text}</p>
-                        {:else}
-                            <p class="text-base-content/50 italic">No text content</p>
-                        {/if}
+                        <input
+                            type="text"
+                            bind:value={element.text}
+                            placeholder="Enter text"
+                            class="input input-bordered w-full"
+                        />
 
-                        {#if element.color !== 'regular'}
-                            <div class="badge">
-                                {element.color}
-                            </div>
-                        {/if}
+                        <select
+                            name={`${i}-text-color`}
+                            id={`${i}-text-color`}
+                            bind:value={element.color}
+                            class="select select-bordered w-full"
+                        >
+                            <option selected={true} value="regular">Regular</option>
+                            <option value="warning">Warning</option>
+                        </select>
 
                         {#if element.conditions.length > 0}
                             <div class="bg-base-200 rounded p-2 text-sm">
