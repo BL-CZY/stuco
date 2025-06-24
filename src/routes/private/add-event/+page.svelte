@@ -1,4 +1,5 @@
 <script lang="ts">
+    import ConditionEditor from '$lib/condition-editor.svelte';
     import type { EventSignupForm } from '$lib/events';
     import VerticalDragList from '$lib/vertical-drag-list.svelte';
     import { slide } from 'svelte/transition';
@@ -65,6 +66,15 @@
                                 Remove
                             </button>
                         </div>
+                        <label for={`${i}-q-id`} class="label"
+                            ><span>The id of this question (cannot be a duplicate):</span>
+                        </label>
+                        <input
+                            type="text"
+                            bind:value={element.id}
+                            id={`${i}-q-id`}
+                            placeholder="Age"
+                        />
 
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div class="form-control">
@@ -77,7 +87,7 @@
                                     id={`${i}-q-name`}
                                     placeholder="Enter your question"
                                     bind:value={element.question}
-                                    class="input input-bordered w-full"
+                                    class="input input-bordered w-full overflow-hidden text-ellipsis whitespace-nowrap"
                                 />
                             </div>
 
@@ -173,6 +183,23 @@
                     </div>
                 {/if}
             </div>
+
+            <ConditionEditor
+                target={element.conditions}
+                elements={form.elements}
+                AddCondition={(condition) => {
+                    element.conditions.push(condition);
+                }}
+                RemoveCondition={(index) => {
+                    element.conditions.splice(index, 1);
+                }}
+                UpdateCondition={(index, condition) => {
+                    element.conditions[index] = condition;
+                }}
+                InsertCondition={(index, condition) => {
+                    element.conditions.splice(index, 0, condition);
+                }}
+            />
         {/each}
 
         <div class="divider">Add New Element</div>

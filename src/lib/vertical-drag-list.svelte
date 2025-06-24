@@ -1,6 +1,6 @@
 <script lang="ts">
     import { droppable, draggable, type DragDropState } from '@thisux/sveltednd';
-    import { slide } from 'svelte/transition';
+    import { flip } from 'svelte/animate';
     let value = $state('');
     let { items = $bindable() }: { items: string[] } = $props();
 
@@ -13,10 +13,10 @@
     <h3 class="text mb-4 font-semibold">Options:</h3>
 
     <div class="mb-4 space-y-2">
-        {#each items as item, i (i)}
+        {#each items as item, i (item)}
             <div
                 class="bg-base-100 hover:bg-base-300 flex cursor-move items-center gap-2 rounded-md p-2 transition-all duration-200"
-                transition:slide
+                animate:flip={{ duration: 200 }}
                 use:droppable={{
                     container: i.toString(),
                     callbacks: {
@@ -119,6 +119,9 @@
             onclick={() => {
                 try {
                     if (value.trim()) {
+                        if (items.includes(value.trim())) {
+                            throw new Error('Duplicate value');
+                        }
                         items.push(value);
                         value = '';
                     }

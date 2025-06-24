@@ -1,37 +1,38 @@
 <script lang="ts">
-    import type { Condition } from '$lib/events';
+    import type { Condition, EventSignupElement } from './events';
 
     let {
-        addCondition,
-        removeCondition,
-        conditions = $bindable()
+        target = $bindable(),
+        elements
     }: {
-        conditions: Condition[];
-        addCondition: (con: Condition) => void;
-        removeCondition: (index: number) => void;
+        target: Condition[];
+        elements: EventSignupElement[];
+        AddCondition: (condition: Condition) => void;
+        RemoveCondition: (index: number) => void;
+        UpdateCondition: (index: number, condition: Condition) => void;
+        InsertCondition: (index: number, condition: Condition) => void;
     } = $props();
+
+    const logicalOperators = ['(', ')', 'and', 'or', 'not'];
 </script>
 
-<div>
-    <h2>Condition Editor</h2>
-    <div>
-        {#each conditions as condition, i}
-            <div class="condition">
-                <input
-                    type="text"
-                    placeholder="Name"
-                    bind:value={condition.name}
-                    on:input={(e) => updateCondition(condition.id, 'name', e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Value"
-                    bind:value={condition.value}
-                    on:input={(e) => updateCondition(condition.id, 'value', e.target.value)}
-                />
-                <button on:click={() => removeCondition(condition.id)}>Remove</button>
-            </div>
-        {/each}
-    </div>
-    <button on:click={addCondition}>Add Condition</button>
-</div>
+{#each target as condition, i}
+    {#if condition.type === 'connection'}
+        <div class="form-control">
+            <label for={`connection-${i}`} class="label">
+                <span class="label-text">Logical Connector</span>
+            </label>
+            <select
+                id={`connection-${i}`}
+                bind:value={condition.connector}
+                class="select select-bordered w-full"
+            >
+                {#each logicalOperators as operator}
+                    <option value={operator}>{operator}</option>
+                {/each}
+            </select>
+        </div>
+    {:else if condition.type === 'value'}
+        <div></div>
+    {/if}
+{/each}
